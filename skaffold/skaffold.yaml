@@ -8,7 +8,7 @@ build:
   local:
     push: true
   artifacts:
-    - image: lahcenedergham/auth
+    - image: webmakaka/grider-ms-app2-auth
       context: ../app/auth
       docker:
         dockerfile: Dockerfile
