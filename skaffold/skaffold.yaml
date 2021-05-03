@@ -22,6 +22,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
+<<<<<<< HEAD
           - src: '**/*.ts'
             dest: .
     - image: lahcenedergham/tickets
@@ -31,4 +32,7 @@ build:
       sync:
         manual:
           - src: 'src/**/*.ts'
+=======
+          - src: '**/*.js'
+>>>>>>> ed2ce2005ebd605273fb0cb06b2a912ba9238cd8
             dest: .
