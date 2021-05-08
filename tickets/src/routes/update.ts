@@ -7,6 +7,8 @@ import {
   NotAuthorizedError,
 } from '@ldtickets/common';
 import { Ticket } from '../models/Ticket';
+import { TicketUpdatedPublisher } from '../events/publishers/TicketUpdatedPublisher';
+import { natsWrapper } from '../NatsWrapper';
 
 const router = express.Router();
 
@@ -39,6 +41,13 @@ router.put(
     });
 
     await ticket.save();
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      description: ticket.description,
+      price: ticket.price,
+      userId: ticket.userId
+    });
 
     return res.status(200).send(ticket);
   }

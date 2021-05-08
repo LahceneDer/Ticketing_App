@@ -14,13 +14,14 @@ spec:
             backend:
               serviceName: auth-svc
               servicePort: 3000
-<<<<<<< HEAD
           - path: /api/tickets/?(.*)
             backend:
               serviceName: tickets-svc
               servicePort: 3000
-=======
->>>>>>> ed2ce2005ebd605273fb0cb06b2a912ba9238cd8
+          - path: /api/orders/?(.*)
+            backend:
+              serviceName: orders-svc
+              servicePort: 3000
           - path: /?(.*)
             backend:
               serviceName: client-svc
