@@ -2,7 +2,7 @@ import {
   PublisherAbstract,
   SubjectsEnum,
   TicketCreatedEventInterface,
-} from '@ldtickets/common';
+} from '@lahcene-dergham-tickets/common';
 
 export class TicketCreatedPublisher extends PublisherAbstract<
   TicketCreatedEventInterface

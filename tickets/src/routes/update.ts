@@ -5,7 +5,8 @@ import {
   NotFoundError,
   requireAuth,
   NotAuthorizedError,
-} from '@ldtickets/common';
+  BadRequestError,
+} from '@lahcene-dergham-tickets/common';
 import { Ticket } from '../models/Ticket';
 import { TicketUpdatedPublisher } from '../events/publishers/TicketUpdatedPublisher';
 import { natsWrapper } from '../NatsWrapper';
@@ -17,7 +18,6 @@ router.put(
   requireAuth,
   [
     body('title').not().isEmpty().withMessage('Title is required'),
-    body('Description').not().isEmpty().withMessage('Description is required'),
     body('price')
       .isFloat({ gt: 0 })
       .withMessage('Price must be provided and must be greater than 0'),
@@ -30,13 +30,16 @@ router.put(
       throw new NotFoundError();
     }
 
+    if (ticket.orderId) {
+      throw new BadRequestError('Cannot edit a reserved ticket');
+    }
+
     if (ticket.userId !== req.currentUser!.id) {
       throw new NotAuthorizedError();
     }
 
     ticket.set({
       title: req.body.title,
-      description: req.body.description,
       price: req.body.price,
     });
 
@@ -44,9 +47,9 @@ router.put(
     new TicketUpdatedPublisher(natsWrapper.client).publish({
       id: ticket.id,
       title: ticket.title,
-      description: ticket.description,
       price: ticket.price,
-      userId: ticket.userId
+      userId: ticket.userId,
+      version: ticket.version,
     });
 
     return res.status(200).send(ticket);
