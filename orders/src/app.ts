@@ -8,7 +8,7 @@ import {
   errorHandler,
   NotFoundError,
   currentUser,
-} from '@grider-ms-tickets/common';
+} from '@lahcene-dergham-tickets/common';
 
 import { indexOrderRouter } from './routes/index';
 import { newOrderRouter } from './routes/new';
