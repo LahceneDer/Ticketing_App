@@ -6,7 +6,7 @@ deploy:
       - ../k8s/*
 build:
   local:
-    push: true
+    push: false
   artifacts:
     - image: lahcenedergham/auth
       context: ../app/auth

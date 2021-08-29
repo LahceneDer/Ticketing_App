@@ -8,7 +8,7 @@ import {
   errorHandler,
   NotFoundError,
   currentUser,
-} from '@grider-ms-tickets/common';
+} from '@lahcene-dergham-tickets/common';
 import { createChargeRouter } from './routes/new';
 
 const app = express();
