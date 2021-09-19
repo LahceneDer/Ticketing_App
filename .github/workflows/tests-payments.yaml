@@ -10,4 +10,10 @@ jobs:
     runs-on:  ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd payments && npm install && npm run test:ci
+      - run: cd payments && npm install && docker build -t lahcenedergham/orders . && docker push lahcenedergham/orders
+      - name: Login to GitHub Container Registry
+      - uses: docker/login-action@v1
+      - with:
+        - registry: ghcr.io
+        - username: LahceneDer
+        - password: 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
