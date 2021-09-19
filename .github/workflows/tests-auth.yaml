@@ -1,10 +1,12 @@
 name: tests-auth
 on:
-  pull_request
+  pull_request:
+    paths:
+      - 'app/auth/**'
   
 jobs:
   build:
-    runs-on:  centos-latest
+    runs-on:  ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: cd app/auth && npm install && npm run test:ci
